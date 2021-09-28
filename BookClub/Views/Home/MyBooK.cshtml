@@ -1,0 +1,16 @@
+﻿@model IEnumerable<BookClub.Models.UserBooks>
+@using BookClub.Models
+
+<h3>Ваши прочитанные книги @ViewBag.Message</h3>
+<table class="table">
+    <tr><td> Book</td><td>Delete</td></tr>
+    @foreach (var item in Model)
+    {
+        if (item.LoginName == ViewBag.Message)
+        {
+            <tr><td>@item.SelectedBook</td><td>@Html.ActionLink("Удалить", "Delete", new { id = item.id })</td></tr>
+        }
+
+    }
+</table>
+

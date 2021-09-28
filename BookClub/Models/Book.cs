@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 namespace BookClub.Models
 {
     public class Book
+    /*
+    * Созал модель прочтенных книг бля бд и взаимодествия на View
+    */
     {
         public int id { get; set; }
         

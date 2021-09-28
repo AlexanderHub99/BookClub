@@ -9,7 +9,11 @@ using System.Threading.Tasks;
 namespace BookClub.DAL
 {
     public class MyDbContext : DbContext
-    {
+    {    /*
+          *Создаю  Context Bd 
+          *создаю DbSet для взоимодействия с BD через модели 
+          *Зоздаю и проверяю не созданали ДБ (если не создана создаю и наполняю нестовыми данными )
+          */
         public DbSet<Name> Names { get; set; }
         public DbSet<Book> Books { get; set; }
         public DbSet<UserBooks> UserBooks { get; set; }
@@ -35,7 +39,7 @@ namespace BookClub.DAL
                new Book[]
                {
                     new Book{ id =1, NameBook ="Программирование на C#"},
-                    new Book{ id =2, NameBook ="Программирование на C++"},
+                    new Book{ id =2, NameBook ="Программирование на C"},
                     new Book{ id =3, NameBook ="Программирование на GS"},
                     new Book{ id =4, NameBook ="Программирование на Java"},
                     new Book{ id =5, NameBook ="Программирование на Python"},

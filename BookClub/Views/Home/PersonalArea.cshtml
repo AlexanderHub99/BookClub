@@ -5,7 +5,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h3>@ViewBag.Message</h3>
+<h3>Добро пожаловать @ViewBag.Message</h3><a class="text-info" asp-action="MyBooK">Ваши прочитанные книги</a>
 <table class="table">
     <tr><td>Name Book</td><td>Add</td></tr>
     @foreach (var item in Model)
