@@ -14,6 +14,8 @@ namespace BookClub.DAL
         public DbSet<Book> Books { get; set; }
         public DbSet<UserBooks> UserBooks { get; set; }
 
+        
+
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options)
         {
             Database.EnsureCreated();

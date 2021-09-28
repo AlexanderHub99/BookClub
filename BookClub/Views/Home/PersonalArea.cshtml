@@ -1,0 +1,15 @@
+﻿@model IEnumerable<BookClub.Models.Book>
+@using BookClub.Models
+
+<h2>@ViewBag.Message</h2>
+@foreach (string country in ViewBag.Countries)
+{
+    <p>@country</p>
+}
+<table class="table">
+    <tr><td>Name Book</td><td>Add</td></tr>
+    @foreach (var item in Model)
+    {
+        <tr><td>@item.NameBook</td><td><div class="text-warning">@Html.ActionLink("Прочитал", "AddBook", new { id = item.NameBook })</div></td></tr>
+    }
+</table>

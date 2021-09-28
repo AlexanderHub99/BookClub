@@ -2,11 +2,8 @@
 using BookClub.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace BookClub.Controllers
@@ -20,12 +17,19 @@ namespace BookClub.Controllers
             {
                 db = context;
             }
-        
 
-        public async Task<IActionResult> Index()
+        string viewBagMessageLogi = null;
+
+        public IActionResult Index()
         {
+            return View();
+        }
+        public async Task<IActionResult> PersonalArea()
+        {
+            ViewBag.Countries = new List<string> { viewBagMessageLogi };
             return View(await db.Books.ToListAsync());
         }
+        
         public IActionResult Create()
         {
             return View();
@@ -34,26 +38,51 @@ namespace BookClub.Controllers
         public async Task<IActionResult> Create(Name name)
         {
             var user = db.Names.Find(name.LoginID);
-            
-            if (user == null )
+
+            viewBagMessageLogi = name.LoginID;
+
+            if (user == null)
             {
                 db.Names.Add(name);
                 await db.SaveChangesAsync();
-            }
-            
-            
-            
-            return RedirectToAction("Index");
+            }                      
+            return RedirectToAction("PersonalArea" );
         }
 
-        public IActionResult Privacy()
+        public IActionResult AddBook()
         {
             return View();
         }
-        
-        
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        [HttpGet]
+        public ActionResult AddBook(string id,UserBooks userBooks)
+        {
+            userBooks.SelectedBook = id;
+            if (id == null)
+            {
+                //return RedirectToAction("AddBook");
+            }
+            return View(userBooks);
+        }
+        [HttpPost, ActionName("AddBook")]
+        public async Task<IActionResult> DeleteConfirmed(string id ,UserBooks userBooks )
+        {
+            
+            
+            
+            if (userBooks == null)
+            {
+                return RedirectToAction("Index");
+            }
+            
+            db.UserBooks.Add(userBooks);
+            await db.SaveChangesAsync();
+
+            return RedirectToAction("Index");
+        }
+
+
+            [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });

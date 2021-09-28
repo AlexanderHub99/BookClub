@@ -1,0 +1,26 @@
+﻿@using BookClub.Models
+@model UserBooks
+@using (Html.BeginForm())
+{
+    
+    <body>
+        <form>
+            <h2></h2>
+            <dl>
+                <dt>Добавление книги в прочитанные</dt>
+                <dd>
+
+                    @Html.EditorFor(UserBooks => UserBooks.SelectedBook)
+                    @Html.EditorFor(UserBooks => UserBooks.LoginName)
+                    @Html.EditorFor(UserBooks => UserBooks.id)
+                </dd>
+            </dl>
+
+            @using (Html.BeginForm())
+            {
+                <input type="submit" value="Добавить" />
+            }
+        </form>
+
+    </body>
+}
