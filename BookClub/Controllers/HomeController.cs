@@ -2,7 +2,6 @@
 using BookClub.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 
@@ -18,17 +17,13 @@ namespace BookClub.Controllers
                 db = context;
             }
 
-        string viewBagMessageLogi = null;
+         
 
         public IActionResult Index()
         {
             return View();
         }
-        public async Task<IActionResult> PersonalArea()
-        {
-            ViewBag.Countries = new List<string> { viewBagMessageLogi };
-            return View(await db.Books.ToListAsync());
-        }
+        
         
         public IActionResult Create()
         {
@@ -39,14 +34,20 @@ namespace BookClub.Controllers
         {
             var user = db.Names.Find(name.LoginID);
 
-            viewBagMessageLogi = name.LoginID;
 
             if (user == null)
             {
                 db.Names.Add(name);
                 await db.SaveChangesAsync();
             }                      
-            return RedirectToAction("PersonalArea" );
+            return RedirectToAction("PersonalArea");
+        }
+
+        public async Task<IActionResult> PersonalArea()
+        {
+
+            
+            return View(await db.Books.ToListAsync());
         }
 
         public IActionResult AddBook()
@@ -60,7 +61,7 @@ namespace BookClub.Controllers
             userBooks.SelectedBook = id;
             if (id == null)
             {
-                //return RedirectToAction("AddBook");
+                return RedirectToAction("AddBook");
             }
             return View(userBooks);
         }
