@@ -11,20 +11,20 @@ namespace BookClub.DAL
     public class MyDbContext : DbContext
     {    /*
           *Создаю  Context Bd 
-          *создаю DbSet для взоимодействия с BD через модели 
-          *Зоздаю и проверяю не созданали ДБ (если не создана создаю и наполняю нестовыми данными )
+          *Создаю DbSet для взаимодействия с BD через модели 
+          *Создаю и проверяю не создана ДБ (если не создана ,создаю и наполняю её данными)
           */
         public DbSet<Name> Names { get; set; }
         public DbSet<Book> Books { get; set; }
         public DbSet<UserBooks> UserBooks { get; set; }
 
-        
+
 
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options)
         {
             Database.EnsureCreated();
         }
-        
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Name>().HasData(

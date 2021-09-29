@@ -7,15 +7,15 @@ namespace BookClub.Models
 {
     public class Book
     /*
-    * Созал модель прочтенных книг бля бд и взаимодествия на View
+    * Создал модель прочтенных книг для бд и взаимодействия на View
     */
     {
         public int id { get; set; }
-        
+
         public string NameBook { get; set; }
         public string imgBook { get; set; }
-        
-        
+
+
 
     }
 }

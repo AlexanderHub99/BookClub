@@ -12,11 +12,11 @@ namespace BookClub.Controllers
     {
 
         //инициализация бд в контроллере
-               private MyDbContext db;
-            public HomeController(MyDbContext context)
-            {
-                db = context;
-            }
+        private MyDbContext db;
+        public HomeController(MyDbContext context)
+        {
+            db = context;
+        }
 
 
         //View Index имеет гиперссылку на регистрацию и логин
@@ -45,17 +45,17 @@ namespace BookClub.Controllers
             {
                 db.Names.Add(name);
                 await db.SaveChangesAsync();
-            }                      
+            }
             return RedirectToAction("PersonalArea");
         }
-        //личный кабинет Personal Area имеет в себе ссылку на прочитанные книги , ссылку на добовление книги в прочитынные
+        //личный кабинет Personal Area имеет в себе ссылку на прочитанные книги , ссылку на добавление книги в прочитанные
         public async Task<IActionResult> PersonalArea()
         {
-            if (Request.Cookies["name"]!= null)
+            if (Request.Cookies["name"] != null)
             {
                 @ViewBag.Message = Request.Cookies["name"];
             }
-            
+
             return View(await db.Books.ToListAsync());
         }
         //AddBook отвечает за добавление книги выбранной пользователем в прочитанные
@@ -65,7 +65,7 @@ namespace BookClub.Controllers
         }
 
         [HttpGet]
-        public ActionResult AddBook(string id,UserBooks userBooks)
+        public ActionResult AddBook(string id, UserBooks userBooks)
         {
             userBooks.SelectedBook = id;
             if (id == null)
@@ -75,11 +75,11 @@ namespace BookClub.Controllers
             return View(userBooks);
         }
         [HttpPost, ActionName("AddBook")]
-        public async Task<IActionResult> DeleteConfirmed(string id ,UserBooks userBooks )
+        public async Task<IActionResult> DeleteConfirmed(string id, UserBooks userBooks)
         {
-            
-            
-            
+
+
+
             if (userBooks == null)
             {
                 return RedirectToAction("PersonalArea");
@@ -92,7 +92,7 @@ namespace BookClub.Controllers
             return RedirectToAction("PersonalArea");
         }
         //MyBooK кабинет с прочитанными книгами и ссылкой на удаление
-        public async Task<IActionResult> MyBooK( )
+        public async Task<IActionResult> MyBooK()
         {
             if (Request.Cookies["name"] != null)
             {
